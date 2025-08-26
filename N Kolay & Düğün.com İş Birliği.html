@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
+    <title>Düğün.com & N Kolay İş Birliği Sunumu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        #slides-container {
+            position: relative;
+            width: 100%;
+            height: 700px;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0s linear 0.5s;
+            background-color: white;
+        }
+        .active-slide {
+            opacity: 1;
+            visibility: visible;
+            z-index: 10;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .brand-gradient-text {
+            background: linear-gradient(90deg, #0173ea, #db0962);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: white;
+            border: 4px solid #0173ea;
+        }
+        .timeline-line {
+            position: absolute;
+            left: -21px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #0173ea;
+        }
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; 
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            animation: fadeIn 0.3s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 24px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 1200px;
+            border-radius: 16px;
+            position: relative;
+        }
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+        }
+        
+        /* Yazdırma Stilleri */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .presentation-container {
+                box-shadow: none !important;
+                border: none !important;
+            }
+            .navigation-controls, .modal {
+                display: none !important;
+            }
+            #slides-container {
+                position: static;
+                height: auto;
+            }
+            .slide {
+                position: relative;
+                opacity: 1 !important;
+                visibility: visible !important;
+                display: block !important;
+                page-break-after: always;
+                height: 100vh !important;
+                width: 80% !important;
+                overflow: hidden;
+            }
+            .slide:last-child {
+                page-break-after: auto;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-6xl bg-white rounded-2xl shadow-2xl overflow-hidden presentation-container">
+        <div class="relative">
+            
+            <!-- Slides Container -->
+            <div id="slides-container">
+                <!-- Slide 1: Başlık ve Özet -->
+                <div class="slide active-slide flex flex-col lg:flex-row h-full overflow-hidden">
+                   <div class="p-8 md:p-10 h-full flex flex-col">
+                         <header class="flex justify-between items-center mb-20 w-full">
+ <img src="https://dugun.com/assets/images/logo/dugun.svg" alt="Düğün.com Logo" class="h-15">
+                            <div class="flex items-center space-x-4">
+                                <img src="https://dugun.com/assets/images/nkolay/n-kolay-taksit-logo.svg" alt="N Kolay Taksit Logo" class="h-8">
+                                <div class="h-6 w-px bg-gray-300"></div>
+                                <img src="https://www.nkolay.com/assets/img/main-logo.svg" alt="N Kolay Logo" class="h-8">
+                            </div>
+                        </header>
+                        <div class="text-center lg:text-left mt-4">
+                            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4">Stratejik İş Birliği Sunumu</h1>
+                            <h2 class="text-2xl md:text-3xl font-bold brand-gradient-text">Düğün.com & N Kolay</h2>
+                            <p class="mt-6 text-lg text-gray-600 max-w-xl">
+                                Düğün hazırlığındaki çiftlerin finansal ihtiyaçlarını karşılamak ve üye firmalarımıza yeni bir ödeme çözümü sunmak amacıyla, Düğün.com ve N Kolay iş birliği yapıldı. Bu iş birliği ile çiftlere "Düğün Kredisi" ve "İhtiyaç Kredisi" seçenekleri sunarak hayallerindeki düğünü ertelememelerini; firmaların ise daha çok anlaşma almasını sağlıyoruz.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="hidden lg:block w-1/2 bg-cover bg-center" style="background-image: url('https://github.com/nesibekeles/N-Kolay/blob/main/D%C3%BC%C4%9F%C3%BCn%20Kredisi%20KV-2.png?raw=true'); clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%);">
+                    </div>
+                </div>
+
+                <!-- Slide 2: Zaman Tüneli ve Güncel Durum -->
+                <div class="slide">
+                    <div class="p-8 md:p-10 h-full flex flex-col">
+                        <header class="flex justify-between items-center mb-6">
+ <img src="https://dugun.com/assets/images/logo/dugun.svg" alt="Düğün.com Logo" class="h-15">
+                            <div class="flex items-center space-x-4">
+                                <img src="https://dugun.com/assets/images/nkolay/n-kolay-taksit-logo.svg" alt="N Kolay Taksit Logo" class="h-8">
+                                <div class="h-6 w-px bg-gray-300"></div>
+                                <img src="https://www.nkolay.com/assets/img/main-logo.svg" alt="N Kolay Logo" class="h-8">
+                            </div>
+                        </header>
+                        <div class="flex-grow flex flex-col justify-center">
+                            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Proje Zaman Tüneli ve Güncel Durum</h2>
+                            <div class="flex flex-col md:flex-row justify-between items-start gap-12">
+                                <div class="w-full md:w-1/2">
+                                    <h3 class="text-xl font-semibold text-gray-700 mb-6">Milestones</h3>
+                                    <div class="relative pl-8">
+                                        <div class="timeline-line"></div>
+                                        <div class="timeline-item relative pl-8 pb-8"><h4 class="font-semibold text-gray-800">Mart 2025</h4><p class="text-gray-600">Bayi kazanımı için firma görüşmeleri başladı.</p></div>
+                                        <div class="timeline-item relative pl-8 pb-8"><h4 class="font-semibold text-gray-800">Nisan 2025</h4><p class="text-gray-600">İlk bayi anlaşması yapıldı.</p></div>
+                                        <div class="timeline-item relative pl-8 pb-8"><h4 class="font-semibold text-gray-800">Mayıs 2025</h4><p class="text-gray-600">İlk kredi başarıyla kullandırıldı.</p></div>
+                                        <div class="timeline-item relative pl-8 pb-8"><h4 class="font-semibold text-gray-800">Haziran 2025</h4><p class="text-gray-600">Düğün Kredisi landing page'i yayına alındı.</p></div>
+                                        <div class="timeline-item relative pl-8"><h4 class="font-semibold text-gray-800">Ağustos 2025</h4><p class="text-gray-600">İhtiyaç Kredisi landing page'i canlıya alındı.</p></div>
+                                    </div>
+                                </div>
+                                <div class="w-full md:w-1/2">
+                                     <h3 class="text-xl font-semibold text-gray-700 mb-6">Güncel Durum</h3>
+                                     <div class="space-y-4">
+                                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+                                            <div class="flex justify-between items-center">
+                                                <p class="text-3xl font-bold text-blue-800">25</p>
+                                                <span class="text-sm font-semibold bg-blue-100 text-blue-800 px-2 py-1 rounded-full">%10 Anlaşma Oranı</span>
+                                            </div>
+                                            <p class="text-gray-600 mt-1">Güncel Anlaşmalı Bayi Sayısı</p>
+                                        </div>
+                                        <div class="bg-pink-50 border-l-4 border-pink-500 p-4 rounded-r-lg">
+                                             <div class="flex justify-between items-center">
+                                                <p class="text-3xl font-bold text-pink-800">67</p>
+                                                <span class="text-sm font-semibold bg-pink-100 text-pink-800 px-2 py-1 rounded-full">17 farklı firmadan</span>
+                                            </div>
+                                            <p class="text-gray-600 mt-1">Toplam Kredi Başvurusu</p>
+                                        </div>
+                                        <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
+                                            <div class="flex justify-between items-center">
+                                                <p class="text-3xl font-bold text-green-800">2</p>
+                                                <span class="text-sm font-semibold bg-green-100 text-green-800 px-2 py-1 rounded-full">190.000 TL Değerinde</span>
+                                            </div>
+                                            <p class="text-gray-600 mt-1">Toplam Kullandırılan Kredi</p>
+                                        </div>
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3: İletişim Çalışmaları -->
+                <div class="slide">
+                    <div class="p-8 md:p-10 h-full flex flex-col">
+                         <header class="flex justify-between items-center mb-6">
+ <img src="https://dugun.com/assets/images/logo/dugun.svg" alt="Düğün.com Logo" class="h-15">
+                            <div class="flex items-center space-x-4">
+                                <img src="https://dugun.com/assets/images/nkolay/n-kolay-taksit-logo.svg" alt="N Kolay Taksit Logo" class="h-8">
+                                <div class="h-6 w-px bg-gray-300"></div>
+                                <img src="https://www.nkolay.com/assets/img/main-logo.svg" alt="N Kolay Logo" class="h-8">
+                            </div>
+                        </header>
+                        <div class="flex-grow flex flex-col justify-center">
+                            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Düğün Kredisi İletişim Çalışmaları</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div class="bg-gray-50 p-6 rounded-lg"><h3 class="text-2xl font-bold mb-4 text-[#db0962]">B2C (Çiftlere Yönelik)</h3><ul class="space-y-3 list-disc list-inside text-gray-700"><li>Ana sayfa ve listeleme sayfalarında <strong>banner gösterimleri</strong>.</li><li>İş birliğine özel hazırlanan <strong>landing page</strong>.</li><li>Anlaşmalı firmaları öne çıkaran <strong>"Krediye Uygun" badge'i</strong>.</li><li>Firma listeleme sayfalarında <strong>"Kredili Ödeme" filtresi</strong>.</li><li>Bayi firmaların profilinde <strong>hemen krediye başvur butonu</strong>.</li><li>Yeni üye olan çiftlere giden <strong>otomatik maillerde banner</strong>.</li><li>Sosyal medya ve mailing ile düzenli duyurular.</li></ul></div>
+                                <div class="bg-gray-50 p-6 rounded-lg"><h3 class="text-2xl font-bold mb-4 text-[#0173ea]">B2B (Firmalara Yönelik)</h3><ul class="space-y-3 list-disc list-inside text-gray-700"><li>Prime firmalara iş birliğini <strong>birebir çağrılarda duyurma</strong>.</li><li>Tüm firmaların paneline entegre edilen <strong>başvuru formu</strong>.</li><li>Bütün mekanlara iş birliğini <strong>duyuru mailingleri</strong>.</li><li>Tüm çift leadlerinde <strong>"Kredi ile Ödeme Yaptır" butonu</strong>.</li><li>Dijital reklamlar ile <strong>başvuru toplama</strong>.</li></ul></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 4: Sosyal Medya Planı -->
+                <div class="slide">
+                    <div class="p-8 md:p-10 h-full flex flex-col">
+                        <header class="flex justify-between items-center mb-6">
+ <img src="https://dugun.com/assets/images/logo/dugun.svg" alt="Düğün.com Logo" class="h-15">
+                            <div class="flex items-center space-x-4">
+                               <img src="https://dugun.com/assets/images/nkolay/n-kolay-taksit-logo.svg" alt="N Kolay Taksit Logo" class="h-8">
+                               <div class="h-6 w-px bg-gray-300"></div>
+                               <img src="https://www.nkolay.com/assets/img/main-logo.svg" alt="N Kolay Logo" class="h-8">
+                            </div>
+                        </header>
+                        <div class="flex-grow flex flex-col justify-center">
+                            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Sosyal Medya Performansı</h2>
+                            <div class="overflow-x-auto"><table class="min-w-full bg-white rounded-lg shadow"><thead class="bg-gray-800 text-white"><tr><th class="text-left py-3 px-4 uppercase font-semibold text-sm">İçerik</th><th class="text-left py-3 px-4 uppercase font-semibold text-sm">Format</th><th class="text-left py-3 px-4 uppercase font-semibold text-sm">Tarih</th><th class="text-left py-3 px-4 uppercase font-semibold text-sm">Erişim</th><th class="text-left py-3 px-4 uppercase font-semibold text-sm">Tıklama</th><th class="text-left py-3 px-4 uppercase font-semibold text-sm">Hesap</th></tr></thead><tbody class="text-gray-700"><tr><td class="text-left py-3 px-4">NKolay</td><td class="text-left py-3 px-4">Story</td><td class="text-left py-3 px-4">17.07.2025</td><td class="text-left py-3 px-4">4,937</td><td class="text-left py-3 px-4">20</td><td class="text-left py-3 px-4">B2C</td></tr><tr class="bg-gray-50"><td class="text-left py-3 px-4">NKolay</td><td class="text-left py-3 px-4">Story</td><td class="text-left py-3 px-4">03.07.2025</td><td class="text-left py-3 px-4">5,808</td><td class="text-left py-3 px-4">32</td><td class="text-left py-3 px-4">B2C</td></tr><tr><td class="text-left py-3 px-4">NKolay</td><td class="text-left py-3 px-4">Story</td><td class="text-left py-3 px-4">01.07.2025</td><td class="text-left py-3 px-4">2,776</td><td class="text-left py-3 px-4">14</td><td class="text-left py-3 px-4">B2C</td></tr><tr class="bg-gray-50"><td class="text-left py-3 px-4">NKolay</td><td class="text-left py-3 px-4"><a href="https://www.tiktok.com/@dugun.com/video/7529490133641350418?is_from_webapp=1&sender_device=pc&web_id=7532148586865706502" target="_blank" class="text-blue-600 hover:underline">TikTok</a></td><td class="text-left py-3 px-4">21.07.2025</td><td class="text-left py-3 px-4">2.5 Milyon</td><td class="text-left py-3 px-4">-</td><td class="text-left py-3 px-4">B2C</td></tr><tr><td class="text-left py-3 px-4">NKolay</td><td class="text-left py-3 px-4"><a href="https://www.instagram.com/reel/DLrdf1poA_N/?utm_source=ig_web_copy_link&igsh=MTZ3aWwwMHpweXB3cQ==" target="_blank" class="text-blue-600 hover:underline">Post</a></td><td class="text-left py-3 px-4">04.07.2025</td><td class="text-left py-3 px-4">2,958</td><td class="text-left py-3 px-4">-</td><td class="text-left py-3 px-4">B2B</td></tr></tbody></table></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 5: Dijital Plan -->
+                <div class="slide">
+                    <div class="p-8 md:p-10 h-full flex flex-col">
+                        <header class="flex justify-between items-center mb-4">
+ <img src="https://dugun.com/assets/images/logo/dugun.svg" alt="Düğün.com Logo" class="h-15">
+                            <div class="flex items-center space-x-4">
+                                <img src="https://dugun.com/assets/images/nkolay/n-kolay-taksit-logo.svg" alt="N Kolay Taksit Logo" class="h-8">
+                                <div class="h-6 w-px bg-gray-300"></div>
+                                <img src="https://www.nkolay.com/assets/img/main-logo.svg" alt="N Kolay Logo" class="h-8">
+                            </div>
+                        </header>
+                        <div class="flex-grow flex flex-col justify-center">
+                            <h2 class="text-3xl font-bold text-gray-800 mb-4 text-center">Dijital Pazarlama Performansı</h2>
+                            
+                            <div class="mb-6 bg-gray-50 p-4 rounded-lg shadow-sm">
+                                <h3 class="font-bold text-lg mb-3 text-gray-700 text-center">Bütçe Özeti</h3>
+                                <div class="flex justify-around items-center text-center">
+                                    <div class="flex flex-col items-center"><svg class="w-8 h-8 text-blue-600 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg><span class="text-sm text-gray-500">Toplam Bütçe</span><span class="text-xl font-bold text-gray-800">2.466.000 TL</span></div>
+                                    <div class="h-16 w-px bg-gray-200"></div>
+                                    <div class="flex flex-col items-center"><svg class="w-8 h-8 text-red-500 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg><span class="text-sm text-gray-500">Harcanan</span><span class="text-xl font-bold text-red-600">2.238.443 TL</span></div>
+                                    <div class="h-16 w-px bg-gray-200"></div>
+                                    <div class="flex flex-col items-center"><svg class="w-8 h-8 text-green-500 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg><span class="text-sm text-gray-500">Kalan</span><span class="text-xl font-bold text-green-600">227.557 TL</span></div>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                    <h3 class="font-bold text-lg mb-2 text-gray-700">Display Reklamları Özeti</h3>
+                                    <div class="flex justify-around text-center border-b pb-3 mb-3">
+                                        <div><p class="text-2xl font-bold text-blue-600">30.8 M</p><p class="text-sm text-gray-600">Gösterim</p></div>
+                                        <div><p class="text-2xl font-bold text-[#db0962]">108 K</p><p class="text-sm text-gray-600">Tıklama</p></div>
+                                        <div><p class="text-2xl font-bold text-blue-600">45.444</p><p class="text-sm text-gray-600">GA4 Session</p></div>
+                                    </div>
+                                    <div class="bg-white p-2 rounded-md shadow-inner cursor-pointer h-24 flex flex-col justify-between" onclick="openModal('displayModal')"><div class="blur-sm select-none overflow-hidden"><table class="w-full text-xs text-gray-400"><thead><tr class="font-semibold"><th>Mecra</th><th>Gösterim</th><th>Tıklama</th></tr></thead></table></div><p class="text-center text-sm font-bold text-blue-600 mt-100">Detayları Gör</p></div>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                    <h3 class="font-bold text-lg mb-2 text-gray-700">Video + OTT Reklamları Özeti</h3>
+                                    <div class="flex justify-around text-center border-b pb-3 mb-3">
+                                        <div><p class="text-2xl font-bold text-blue-600">1.3 M</p><p class="text-sm text-gray-600">Görüntülenme</p></div>
+                                        <div><p class="text-2xl font-bold text-[#db0962]">~83%</p><p class="text-sm text-gray-600">İzlenme Oranı</p></div>
+                                        <div><p class="text-2xl font-bold text-blue-600">1.667</p><p class="text-sm text-gray-600">GA4 Session</p></div>
+                                    </div>
+                                     <div class="bg-white p-2 rounded-md shadow-inner cursor-pointer h-24 flex flex-col justify-between" onclick="openModal('videoModal')"><div class="blur-sm select-none overflow-hidden"><table class="w-full text-xs text-gray-400"><thead><tr class="font-semibold"><th>Mecra</th><th>Gösterim</th><th>Tıklama</th></tr></thead></table></div><p class="text-center text-sm font-bold text-blue-600 mt-100">Detayları Gör</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 6: Sonraki Adımlar -->
+                <div class="slide">
+                     <div class="p-8 md:p-10 h-full flex flex-col">
+                        <header class="flex justify-between items-center mb-6">
+ <img src="https://dugun.com/assets/images/logo/dugun.svg" alt="Düğün.com Logo" class="h-15">
+                            <div class="flex items-center space-x-4">
+                               <img src="https://dugun.com/assets/images/nkolay/n-kolay-taksit-logo.svg" alt="N Kolay Taksit Logo" class="h-8">
+                               <div class="h-6 w-px bg-gray-300"></div>
+                               <img src="https://www.nkolay.com/assets/img/main-logo.svg" alt="N Kolay Logo" class="h-8">
+                            </div>
+                        </header>
+                        <div class="flex-grow text-center flex flex-col justify-center items-center">
+                            <h2 class="text-3xl font-bold text-gray-800 mb-10">Devam Eden Süreçler</h2>
+                            <div class="max-w-2xl w-full text-left space-y-6">
+                                <div class="flex items-start p-4 bg-gray-50 rounded-lg"><svg class="w-8 h-8 text-blue-500 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg><div><h3 class="font-semibold text-lg text-gray-800">İhtiyaç Kredisi İletişimini Güçlendirme</h3><p class="text-gray-600">İhtiyaç Kredisi'nin B2C duyurularını ve iletişimini yoğunlaştırmak.</p></div></div>
+                                <div class="flex items-start p-4 bg-gray-50 rounded-lg"><svg class="w-8 h-8 text-blue-500 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg><div><h3 class="font-semibold text-lg text-gray-800">Banner ve Görselleri Güncelleme</h3><p class="text-gray-600">Sitedeki Düğün Kredisi banner'larını, İhtiyaç Kredisi'ni öne çıkaracak şekilde revize etmek.</p></div></div>
+                                <div class="flex items-start p-4 bg-gray-50 rounded-lg"><svg class="w-8 h-8 text-blue-500 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg><div><h3 class="font-semibold text-lg text-gray-800">Otomatik Mailleri Revize Etme</h3><p class="text-gray-600">Çiftlere giden otomatik maillerdeki banner'ları İhtiyaç Kredisi iletişimine uygun olarak güncellemek.</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="navigation-controls absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center space-x-4 z-20">
+                <button id="prevBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">Geri</button>
+                <div id="slide-indicators" class="flex space-x-2"></div>
+                <button id="nextBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">İleri</button>
+                <button id="printBtn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition-colors flex items-center space-x-2"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg></button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modals -->
+    <div id="displayModal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('displayModal')">&times;</span><h3 class="text-xl font-bold mb-4">Display Reklam Detayları</h3><div class="overflow-x-auto"><table class="min-w-full text-sm"><thead><tr class="bg-gray-200 text-left"><th class="p-2">Mecra</th><th class="p-2">Kategori / Site / Hedefleme</th><th class="p-2">Gerçekleşen Imp/View</th><th class="p-2">Click</th><th class="p-2">GA4 Session</th><th class="p-2">GA4 ER</th></tr></thead><tbody><tr class="border-b"><td class="p-2">Sözcü</td><td class="p-2">Sözcü.com / HAYAT Sayfası</td><td class="p-2 number-cell" data-value="5357409"></td><td class="p-2 number-cell" data-value="2475"></td><td class="p-2 number-cell" data-value="1544"></td><td class="p-2 number-cell" data-value="0.2545" data-format="percent"></td></tr><tr class="border-b bg-gray-50"><td class="p-2">Turkuvaz</td><td class="p-2">Sabah.com / Günaydın Sayfası</td><td class="p-2 number-cell" data-value="5159830"></td><td class="p-2 number-cell" data-value="4266"></td><td class="p-2 number-cell" data-value="3253"></td><td class="p-2 number-cell" data-value="0.2837" data-format="percent"></td></tr><tr class="border-b"><td class="p-2">Mediazone</td><td class="p-2">Mynet - Anasayfa | Mobil + Web</td><td class="p-2 number-cell" data-value="11031015"></td><td class="p-2 number-cell" data-value="5044"></td><td class="p-2 number-cell" data-value="3784"></td><td class="p-2 number-cell" data-value="0.2368" data-format="percent"></td></tr><tr class="border-b bg-gray-50"><td class="p-2">Makroo</td><td class="p-2">Kadınlar Kulübü | Ortaya Karışık Kategorisi | MASS</td><td class="p-2 number-cell" data-value="2028939"></td><td class="p-2 number-cell" data-value="2009"></td><td class="p-2 number-cell" data-value="893"></td><td class="p-2 number-cell" data-value="0.2777" data-format="percent"></td></tr><tr class="border-b"><td class="p-2">KızlarSoruyor</td><td class="p-2">Kızlarsoruyor.com | Site Geneli (Sponsorlu Sayfalar Hariç) | Desktop + Mobil</td><td class="p-2 number-cell" data-value="1260024"></td><td class="p-2 number-cell" data-value="81621"></td><td class="p-2 number-cell" data-value="31075"></td><td class="p-2 number-cell" data-value="0.1217" data-format="percent"></td></tr><tr class="border-b bg-gray-50"><td class="p-2">Liberdatum (Adform)</td><td class="p-2">Run Of Network | 25-34 ABC1 kitle %70 Kadın - %30 Erkek | İstanbul, Ankara, İzmir, Adana, Bursa ve Kocaeli</td><td class="p-2 number-cell" data-value="5972042"></td><td class="p-2 number-cell" data-value="12874"></td><td class="p-2 number-cell" data-value="4895"></td><td class="p-2 number-cell" data-value="0.2807" data-format="percent"></td></tr></tbody><tfoot><tr class="font-bold bg-gray-200 text-left"><td class="p-2" colspan="2">Toplam</td><td class="p-2 number-cell" data-value="30809259"></td><td class="p-2 number-cell" data-value="108289"></td><td class="p-2 number-cell" data-value="45444"></td><td class="p-2"></td></tr></tfoot></table></div></div></div>
+    <div id="videoModal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('videoModal')">&times;</span><h3 class="text-xl font-bold mb-4">Video + OTT Reklam Detayları</h3><div class="overflow-x-auto"><table class="min-w-full text-xs"><thead><tr class="bg-gray-200 text-left"><th class="p-2">Mecra</th><th class="p-2">Kategori / Site / Hedefleme</th><th class="p-2">Gerçekleşen Imp/View</th><th class="p-2">%100 İzlenme</th><th class="p-2">GA4 Session</th><th class="p-2">GA4 ER</th><th class="p-2">25%</th><th class="p-2">50%</th><th class="p-2">75%</th><th class="p-2">100%</th><th class="p-2">Video Plays</th><th class="p-2">VCR</th></tr></thead><tbody><tr class="border-b"><td class="p-2">HepsiAds</td><td class="p-2">Max ( OTT )</td><td class="p-2 number-cell" data-value="101974"></td><td class="p-2 number-cell" data-value="97004"></td><td class="p-2 number-cell" data-value=""></td><td class="p-2 number-cell" data-value="" data-format="percent"></td><td class="p-2 number-cell" data-value="98311"></td><td class="p-2 number-cell" data-value="97709"></td><td class="p-2 number-cell" data-value="97789"></td><td class="p-2 number-cell" data-value="97004"></td><td class="p-2 number-cell" data-value="101969"></td><td class="p-2 number-cell" data-value="0.9513" data-format="percent"></td></tr><tr class="border-b bg-gray-50"><td class="p-2">Acunn</td><td class="p-2">Exxen ( OTT ) | Kategori 1</td><td class="p-2 number-cell" data-value="115969"></td><td class="p-2 number-cell" data-value="113541"></td><td class="p-2 number-cell" data-value="53"></td><td class="p-2 number-cell" data-value="0.2264" data-format="percent"></td><td class="p-2 number-cell" data-value="103029"></td><td class="p-2 number-cell" data-value="102594"></td><td class="p-2 number-cell" data-value="102336"></td><td class="p-2 number-cell" data-value="113541"></td><td class="p-2 number-cell" data-value="115969"></td><td class="p-2 number-cell" data-value="0.9791" data-format="percent"></td></tr><tr class="border-b"><td class="p-2">Mediaworks</td><td class="p-2">RON | İstanbul, Ankara, İzmir, Adana, Bursa ve Kocaeli</td><td class="p-2 number-cell" data-value="267123"></td><td class="p-2 number-cell" data-value="227669"></td><td class="p-2 number-cell" data-value="247"></td><td class="p-2 number-cell" data-value="0.2429" data-format="percent"></td><td class="p-2 number-cell" data-value="256785"></td><td class="p-2 number-cell" data-value="244257"></td><td class="p-2 number-cell" data-value="236137"></td><td class="p-2 number-cell" data-value="227669"></td><td class="p-2 number-cell" data-value="267123"></td><td class="p-2 number-cell" data-value="0.8523" data-format="percent"></td></tr><tr class="border-b bg-gray-50"><td class="p-2">Liberdatum (Adform)</td><td class="p-2">Güncel Diziler& Kanal Anasayfaları | 25-34 ABC1 kitle %70 Kadın - %30 Erkek | İstanbul, Ankara, İzmir, Adana, Bursa ve Kocaeli</td><td class="p-2 number-cell" data-value="837787"></td><td class="p-2 number-cell" data-value="665605"></td><td class="p-2 number-cell" data-value="1367"></td><td class="p-2 number-cell" data-value="0.1768" data-format="percent"></td><td class="p-2 number-cell" data-value="762163"></td><td class="p-2 number-cell" data-value="725985"></td><td class="p-2 number-cell" data-value="692989"></td><td class="p-2 number-cell" data-value="665605"></td><td class="p-2 number-cell" data-value="837787"></td><td class="p-2 number-cell" data-value="0.8723" data-format="percent"></td></tr></tbody><tfoot><tr class="font-bold bg-gray-200 text-left"><td class="p-2" colspan="2">Toplam</td><td class="p-2 number-cell" data-value="1322853"></td><td class="p-2 number-cell" data-value="1103819"></td><td class="p-2 number-cell" data-value="1667"></td><td class="p-2"></td><td class="p-2"></td><td class="p-2"></td><td class="p-2"></td><td class="p-2 number-cell" data-value="1103819"></td><td class="p-2 number-cell" data-value="1322848"></td><td class="p-2 number-cell" data-value="0.8344" data-format="percent"></td></tr></tfoot></table></div></div></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // SLIDER LOGIC
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const printBtn = document.getElementById('printBtn');
+            const indicatorsContainer = document.getElementById('slide-indicators');
+            let currentSlide = 0;
+
+            function createIndicators() {
+                slides.forEach((_, i) => {
+                    const indicator = document.createElement('div');
+                    indicator.classList.add('w-3', 'h-3', 'rounded-full', 'cursor-pointer', 'transition-colors');
+                    indicator.addEventListener('click', () => goToSlide(i));
+                    indicatorsContainer.appendChild(indicator);
+                });
+            }
+
+            function updateIndicators() {
+                const indicators = indicatorsContainer.children;
+                for (let i = 0; i < indicators.length; i++) {
+                    indicators[i].classList.toggle('bg-blue-600', i === currentSlide);
+                    indicators[i].classList.toggle('bg-gray-300', i !== currentSlide);
+                }
+            }
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active-slide', i === index);
+                });
+                prevBtn.disabled = index === 0;
+                nextBtn.disabled = index === slides.length - 1;
+                updateIndicators();
+            }
+            
+            function goToSlide(index) {
+                currentSlide = index;
+                showSlide(currentSlide);
+            }
+
+            prevBtn.addEventListener('click', () => { if (currentSlide > 0) { currentSlide--; showSlide(currentSlide); } });
+            nextBtn.addEventListener('click', () => { if (currentSlide < slides.length - 1) { currentSlide++; showSlide(currentSlide); } });
+            printBtn.addEventListener('click', () => { window.print(); });
+
+            createIndicators();
+            showSlide(currentSlide);
+
+            // MODAL LOGIC
+            window.openModal = function(modalId) { document.getElementById(modalId).style.display = "block"; }
+            window.closeModal = function(modalId) { document.getElementById(modalId).style.display = "none"; }
+            window.onclick = function(event) {
+                if (event.target.classList.contains('modal')) {
+                    event.target.style.display = "none";
+                }
+            }
+
+            // NUMBER FORMATTING LOGIC
+            function formatNumber(num, formatType) {
+                if (num === null || num === '' || isNaN(num)) {
+                    return '';
+                }
+
+                if (formatType === 'percent') {
+                    const percentage = (num * 100).toFixed(2).replace('.', ',');
+                    return `${percentage}%`;
+                }
+                
+                const integerPart = Math.round(num);
+                return integerPart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            }
+
+            const numberCells = document.querySelectorAll('.number-cell');
+            numberCells.forEach(cell => {
+                const value = parseFloat(cell.dataset.value);
+                const format = cell.dataset.format;
+                cell.textContent = formatNumber(value, format);
+            });
+        });
+    </script>
+
+</body>
+</html>
